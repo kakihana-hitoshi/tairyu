@@ -1,138 +1,122 @@
 import Image from "next/image"
-import { ArrowRight, Mail, Phone } from "lucide-react"
+import { Calendar, ChevronRight, Globe, Mail } from "lucide-react"
 
+import { MainNav } from "./components/main-nav"
+import { SiteFooter } from "./components/site-footer"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 
 export default function Home() {
+  const navigationItems = [
+    { href: "/", label: "HOME" },
+    { href: "/notice", label: "公示" },
+    { href: "/sailing-instructions", label: "帆走指示書" },
+    { href: "/participants", label: "参加艇" },
+    { href: "/past-events", label: "過去大会の様子" },
+    { href: "/contact", label: "お問い合わせ" },
+  ]
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <div className="mr-4 hidden md:flex">
-            <a className="mr-6 flex items-center space-x-2" href="/">
-              <Image src="/placeholder.svg?height=24&width=24" alt="Logo" width={24} height={24} />
-              <span className="hidden font-bold sm:inline-block">Acme Inc.</span>
-            </a>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              <a className="transition-colors hover:text-foreground/80 text-foreground/60" href="#services">
-                Services
-              </a>
-              <a className="transition-colors hover:text-foreground/80 text-foreground/60" href="#about">
-                About
-              </a>
-              <a className="transition-colors hover:text-foreground/80 text-foreground/60" href="#contact">
-                Contact
-              </a>
-            </nav>
-          </div>
-          <Button className="ml-auto" size="sm">
-            Get Started
-          </Button>
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white dark:from-sky-900 dark:to-slate-900">
+      <MainNav />
+
+      {/* メインビジュアル */}
+      <section className="relative h-[60vh] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-600 to-blue-600 opacity-70" />
+        <div className="absolute inset-0">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/top-xdwxCFNp6qh6wBqJ1rsK1SKX4c3Plx.png"
+            alt="Yacht racing in blue ocean"
+            width={1600}
+            height={800}
+            className="w-full h-full object-cover"
+            priority
+          />
         </div>
-      </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Welcome to Acme Inc.
-                </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  We provide innovative solutions for your business needs. Let's grow together.
-                </p>
-              </div>
-              <div className="space-x-4">
-                <Button>Learn More</Button>
-                <Button variant="outline">Contact Sales</Button>
-              </div>
+        <div className="relative container mx-auto px-4 h-full flex items-center">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%),_0_4px_6px_rgb(0_0_0_/_20%),_0_8px_12px_rgb(0_0_0_/_20%)]">
+              第19回台湾友好親善国際ヨットレース
+            </h2>
+            <p className="text-lg md:text-xl mb-8 text-sky-50 tracking-wide font-medium [text-shadow:_0_1px_2px_rgb(0_0_0_/_20%),_0_2px_4px_rgb(0_0_0_/_20%)]">
+              2025年6月開催 - 基隆市・宮古島市姉妹都市交流事業
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="bg-white text-sky-600 hover:bg-sky-50">
+                参加申込はこちら
+              </Button>
+              <Button size="lg" variant="outline" className="border-white text-sky-600 bg-white/90 hover:bg-white">
+                大会詳細を見る
+              </Button>
             </div>
-          </div>
-        </section>
-        <section id="services" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Services</h2>
-            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 mt-8">
-              {["Consulting", "Development", "Marketing"].map((service) => (
-                <div key={service} className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
-                  <div className="p-2 bg-black bg-opacity-50 rounded-full">
-                    <ArrowRight className="text-white h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-bold">{service}</h3>
-                  <p className="text-zinc-200 dark:text-zinc-100 text-center">
-                    We offer top-notch {service.toLowerCase()} services tailored to your needs.
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section id="about" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-8">
-              <div className="space-y-4 md:w-1/2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About Us</h2>
-                <p className="text-gray-500 dark:text-gray-400">
-                  Acme Inc. has been at the forefront of innovation for over a decade. We're committed to delivering
-                  excellence in every project we undertake.
-                </p>
-              </div>
-              <div className="md:w-1/2">
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="About Acme Inc."
-                  width={600}
-                  height={400}
-                  className="rounded-lg object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8">Contact Us</h2>
-            <div className="grid gap-10 sm:grid-cols-2">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-2">
-                  <Mail className="text-gray-500" />
-                  <span>info@acmeinc.com</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone className="text-gray-500" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-              </div>
-              <form className="space-y-4">
-                <Input placeholder="Your Name" />
-                <Input type="email" placeholder="Your Email" />
-                <Textarea placeholder="Your Message" />
-                <Button type="submit">Send Message</Button>
-              </form>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer className="w-full py-6 bg-gray-800 text-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-300">
-                Twitter
-              </a>
-              <a href="#" className="hover:text-gray-300">
-                LinkedIn
-              </a>
-              <a href="#" className="hover:text-gray-300">
-                Facebook
-              </a>
-            </div>
-            <p className="text-sm text-gray-400">© 2025 Acme Inc. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* ニュース */}
+      <section className="py-16 container mx-auto px-4">
+        <h3 className="text-2xl font-bold mb-8">最新情報</h3>
+        <div className="grid gap-4">
+          {[
+            {
+              date: "2025.2.1",
+              title: "参加申込受付を開始しました",
+              category: "お知らせ",
+            },
+            {
+              date: "2025.1.15",
+              title: "大会スケジュールを公開しました",
+              category: "イベント",
+            },
+            {
+              date: "2025.1.5",
+              title: "協賛企業の募集を開始します",
+              category: "お知らせ",
+            },
+          ].map((news, i) => (
+            <div
+              key={i}
+              className="group p-4 border rounded-lg hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <time className="text-sm text-gray-500 dark:text-gray-400">{news.date}</time>
+                  <span className="px-2 py-1 text-xs rounded bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300">
+                    {news.category}
+                  </span>
+                </div>
+                <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-sky-600 transition-colors" />
+              </div>
+              <h4 className="mt-2 font-medium group-hover:text-sky-600 transition-colors">{news.title}</h4>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 開催概要 */}
+      <section className="py-16 bg-gradient-to-b from-transparent to-sky-50 dark:to-sky-900/20">
+        <div className="container mx-auto px-4">
+          <h3 className="text-2xl font-bold mb-8">開催概要</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg">
+              <Calendar className="h-8 w-8 text-sky-600 mb-4" />
+              <h4 className="text-xl font-bold mb-2">開催日程</h4>
+              <p className="text-gray-600 dark:text-gray-300">2025年6月9日（月）〜 6月15日（日）</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg">
+              <Globe className="h-8 w-8 text-sky-600 mb-4" />
+              <h4 className="text-xl font-bold mb-2">開催地</h4>
+              <p className="text-gray-600 dark:text-gray-300">基隆市（台湾）・宮古島市（日本）</p>
+            </div>
+            <div className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg">
+              <Mail className="h-8 w-8 text-sky-600 mb-4" />
+              <h4 className="text-xl font-bold mb-2">お問い合わせ</h4>
+              <p className="text-gray-600 dark:text-gray-300">大会事務局：info@taiwan-ryukyu-regatta.com</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
     </div>
   )
 }

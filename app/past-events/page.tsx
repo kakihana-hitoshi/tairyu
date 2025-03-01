@@ -1,41 +1,57 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronRight, Globe, Menu, Play } from "lucide-react"
+import { ChevronRight, Play } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { Dialog, DialogContent, DialogDescription, DialogTrigger } from "@/components/ui/dialog"
+import { useEffect, useState } from "react"
 
 export default function PastEventsPage() {
-  const navigationItems = [
-    { href: "/", label: "HOME" },
-    { href: "/notice", label: "公示" },
-    { href: "/sailing-instructions", label: "帆走指示書" },
-    { href: "/participants", label: "参加艇" },
-    { href: "/past-events", label: "過去大会の様子" },
-    { href: "#", label: "お問い合わせ" },
-  ]
+  const [api, setApi] = useState<any>()
+  const [current, setCurrent] = useState(0)
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!api) return
+
+    const interval = setInterval(() => {
+      api.scrollNext()
+    }, 3000) // Change slide every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [api])
 
   const events = [
     {
-      year: 2018,
+      year: 2023,
       images: [
         {
-          src: "/placeholder.svg?height=400&width=600",
-          alt: "海上でのヨットレースの様子",
-          description: "台湾・宮古島間を結ぶレースの様子",
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023.jpg-NBedEi6GigVL3uZUQwFLytJkh2Fvid.jpeg",
+          alt: "レース中のヨットからの眺め",
+          description: "日の丸と大会旗を掲げて航行する参加艇からの美しい眺望",
         },
         {
-          src: "/placeholder.svg?height=400&width=600",
-          alt: "文化交流イベントでの獅子舞",
-          description: "開会式での伝統芸能パフォーマンス",
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023a.jpg-KlRAUv4iXI5yLHxStB3IRG8EbiSQ8T.jpeg",
+          alt: "基隆港のヨット群",
+          description: "基隆港のマリーナに集結した参加艇たち",
         },
         {
-          src: "/placeholder.svg?height=400&width=600",
-          alt: "レセプションの様子",
-          description: "参加者交流会でのワイン展示",
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023b.jpg-zKbVkeooqUzCedtSPLHNmPsD3qFf0C.jpeg",
+          alt: "文化交流イベントの様子",
+          description: "大会関係者による記念撮影",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023c.jpg-CYwFbaeq8uDc2jDoRfPJC4xqPnmbR3.jpeg",
+          alt: "獅子舞パフォーマンス",
+          description: "台湾伝統の獅子舞による歓迎パフォーマンス",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023d.jpg-w27PheZwVFdFgpGkfFXdBo0w0NHxE7.jpeg",
+          alt: "レース旗を掲げる参加艇",
+          description: "大会旗を掲げて停泊中の参加艇たち",
         },
       ],
     },
@@ -43,78 +59,46 @@ export default function PastEventsPage() {
       year: 2014,
       images: [
         {
-          src: "/placeholder.svg?height=400&width=600",
-          alt: "レース中のヨット",
-          description: "接近戦を繰り広げる参加艇",
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080301.JPG-UnupuEf3VVJO6O7cY8IicUFYf3N7c2.jpeg",
+          alt: "歓迎会での若い参加者たち",
+          description: "歓迎会で交流を楽しむ若い参加者たち",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080302.JPG-HDwTNaM4IDknzjsY7dGrfKumJd3NF5.jpeg",
+          alt: "交流会のテーブルシーン",
+          description: "円卓を囲んで和やかに交流する参加者たち",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080303.JPG-AeIp33OgSYiDYJI9L22Od98mu9RF9B.jpeg",
+          alt: "乾杯シーン",
+          description: "日台の参加者による和やかな乾杯の様子",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080304.JPG-gS6uEA89rGu1VMCCcTuqxFc6Jmdwp7.jpeg",
+          alt: "ステージでの盛り上がり",
+          description: "ステージ上で盛り上がる若い参加者たち",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080310.JPG-kj103Snj6ieIVYS6zVya62myEmZV12.jpeg",
+          alt: "大会関係者のスピーチ",
+          description: "台琉国際帆船賽の横断幕の下でのスピーチの様子",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080319.JPG-4F7CF5094ih1vyiQ7yfM39RNLCPanC.jpeg",
+          alt: "若者たちの交流",
+          description: "笑顔で交流する若い参加者たち",
+        },
+        {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/P1080320.JPG-UY62SyvUeT43YshtVE5MJlgivLO4SX.jpeg",
+          alt: "歓迎会での交流",
+          description: "歓迎会での和やかな交流シーン",
         },
       ],
     },
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white dark:from-sky-900 dark:to-slate-900">
-      {/* ヘッダー */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-slate-900/70 border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">メニューを開く</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                  <SheetHeader>
-                    <SheetTitle>メニュー</SheetTitle>
-                  </SheetHeader>
-                  <nav className="flex flex-col space-y-4 mt-6">
-                    {navigationItems.map((item) => (
-                      <Link key={item.label} href={item.href} className="text-lg hover:text-sky-600 transition-colors">
-                        {item.label}
-                      </Link>
-                    ))}
-                  </nav>
-                </SheetContent>
-              </Sheet>
-              <Link href="/" className="flex items-center space-x-2">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/top-uQf9XmUeup0K8BgEmCpFPSjefxGJsC.png"
-                  alt="Logo"
-                  width={40}
-                  height={40}
-                  className="w-10 h-10"
-                />
-                <span className="text-lg font-bold hidden md:block">Taiwan Ryukyu Regatta</span>
-              </Link>
-            </div>
-            <nav className="hidden md:flex items-center space-x-6">
-              {navigationItems.map((item) => (
-                <Link key={item.label} href={item.href} className="text-sm hover:text-sky-600 transition-colors">
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex items-center space-x-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Globe className="h-5 w-5" />
-                    <span className="sr-only">言語切替</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>日本語</DropdownMenuItem>
-                  <DropdownMenuItem>繁體中文</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button className="hidden md:flex">エントリー受付中</Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <>
       {/* パンくずリストとページヘッダー */}
       <div className="bg-sky-900 text-white">
         <div className="container mx-auto px-4">
@@ -138,46 +122,87 @@ export default function PastEventsPage() {
       {/* メインコンテンツ */}
       <div className="container mx-auto px-4 py-8">
         <div className="space-y-12">
+          {/* 2023年大会動画 */}
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold">2023年大会動画</h2>
+            <div className="max-w-5xl mx-auto">
+              <div className="relative aspect-video rounded-lg overflow-hidden bg-black">
+                <video controls className="w-full h-full" poster="/placeholder.svg?height=720&width=1280">
+                  <source
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2023-ljulk3KYtyAcqc210AdO1eiO9ePJts.mp4"
+                    type="video/mp4"
+                  />
+                  お使いのブラウザは動画の再生に対応していません。
+                </video>
+              </div>
+              <p className="text-center mt-4 text-muted-foreground">2023年台湾琉球国際ヨットレースのハイライト映像</p>
+            </div>
+          </section>
+
+          {/* 各年の写真カルーセル */}
           {events.map((event) => (
             <section key={event.year} className="space-y-6">
               <h2 className="text-2xl font-bold">{event.year}年大会</h2>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {event.images.map((image, index) => (
-                  <Dialog key={index}>
-                    <DialogTrigger asChild>
-                      <Card className="overflow-hidden group cursor-pointer">
-                        <CardContent className="p-0 relative">
-                          <div className="aspect-video relative">
-                            <Image
-                              src={image.src || "/placeholder.svg"}
-                              alt={image.alt}
-                              fill
-                              className="object-cover transition-transform group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <Play className="w-12 h-12 text-white" />
+              <div className="grid gap-6">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  setApi={setApi}
+                  className="w-full max-w-5xl mx-auto px-12"
+                  current={current}
+                  onSelect={(index) => setCurrent(index)}
+                >
+                  <CarouselContent>
+                    {event.images.map((image, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Card className="overflow-hidden group cursor-pointer">
+                              <CardContent className="p-0 relative">
+                                <div className="aspect-video relative">
+                                  <Image
+                                    src={image.src || "/placeholder.svg"}
+                                    alt={image.alt}
+                                    fill
+                                    className="object-cover transition-transform group-hover:scale-105"
+                                  />
+                                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <Play className="w-12 h-12 text-white" />
+                                  </div>
+                                </div>
+                                <div className="p-4 bg-gradient-to-t from-black/80 to-transparent absolute bottom-0 left-0 right-0 text-white">
+                                  <p className="text-sm">{image.description}</p>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-4xl">
+                            <DialogDescription className="sr-only">{image.description}</DialogDescription>
+                            <div className="aspect-video relative">
+                              <Image
+                                src={image.src || "/placeholder.svg"}
+                                alt={image.alt}
+                                fill
+                                className="object-contain"
+                              />
                             </div>
-                          </div>
-                          <div className="p-4 bg-gradient-to-t from-black/80 to-transparent absolute bottom-0 left-0 right-0 text-white">
-                            <p className="text-sm">{image.description}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl">
-                      <div className="aspect-video relative">
-                        <Image src={image.src || "/placeholder.svg"} alt={image.alt} fill className="object-contain" />
-                      </div>
-                      <p className="text-center mt-4">{image.description}</p>
-                    </DialogContent>
-                  </Dialog>
-                ))}
+                            <p className="text-center mt-4">{image.description}</p>
+                          </DialogContent>
+                        </Dialog>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
               </div>
             </section>
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -1,0 +1,35 @@
+{
+      year: 2014,
+      images: [
+        {
+          src: "https://drive.google.com/file/d/1-whMHn7kdaSEj3qx4XLWd3OCLCam8XNc/preview",
+          alt: "ヨットレース写真1",
+          description: "接近戦を繰り広げる参加艇",
+        },
+        {
+          src: "https://drive.google.com/file/d/1-yiVhmLdM9Hpyv0-SV4OEpUxP2Pw8ndp/preview",
+          alt: "ヨットレース写真10",
+          description: "接近戦を繰り広げる参加艇",
+        },
+        {
+          src: "https://drive.google.com/file/d/11Jvg-Dt7p63_HGJoydoSLnQVeeUBq0or/preview",
+          alt: "ヨットレース写真11",
+          description: "接近戦を繰り広げる参加艇",
+        },
+        {
+          src: "https://drive.google.com/file/d/12CAEL7EmzO9ntFjfX10C3PqBgWa6NO7w/preview",
+          alt: "ヨットレース写真13",
+          description: "接近戦を繰り広げる参加艇",
+        },
+        {
+          src: "https://drive.google.com/file/d/159s76j8MYic6DoV2sOCPbnzB7dxVwhvl/preview",
+          alt: "ヨットレース写真14",
+          description: "接近戦を繰り広げる参加艇",
+        },
+        {
+          src: "https://drive.google.com/file/d/15l-2qmxwl9AYtnFaWrucvjhCnbNad169/preview",
+          alt: "ヨットレース写真最終",
+          description: "接近戦を繰り広げる参加艇",
+        },
+      ],
+    },

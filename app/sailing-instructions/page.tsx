@@ -16,7 +16,7 @@ export default function SailingInstructionsPage() {
       title: "Self Declaration Form",
       description: "自我申告書のPDFフォームです。",
       filename: "自我申告書Self Declaration Form.pdf",
-      url: "https://drive.google.com/file/d/1eWdcikyiU2feC7mHuwEEpszMkM6Omhso/view?usp=sharing",
+      url: "https://drive.google.com/file/d/1eWdcikyiU2feC7mHuwEEpszMkM6Omhso/view?usp=drive_link",
     },
   ]
 

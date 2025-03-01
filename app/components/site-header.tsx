@@ -34,13 +34,15 @@ export function SiteHeader() {
               </SheetContent>
             </Sheet>
             <div className="flex items-center">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo.jpg-irkXlOqUxOVAWV8zQIk2gp4zLndFmC.jpeg"
-                alt="台湾友好親善国際ヨットレース"
-                width={180}
-                height={120}
-                className="h-14 w-auto"
-              />
+              <Link href="/">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo.jpg-irkXlOqUxOVAWV8zQIk2gp4zLndFmC.jpeg"
+                  alt="台湾友好親善国際ヨットレース"
+                  width={180}
+                  height={120}
+                  className="h-14 w-auto"
+                />
+              </Link>
             </div>
             <h1 className="text-lg font-bold hidden md:block">台湾友好親善国際ヨットレース</h1>
           </div>

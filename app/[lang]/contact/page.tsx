@@ -1,39 +1,40 @@
-"use client"
-
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { translations } from "@/translations"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { getDictionary } from "../dictionaries"
 
-export default function ContactPage() {
-  const { language } = useLanguage()
-  const t = translations[language as keyof typeof translations]
+export default async function ContactPage({
+  params: { lang },
+}: {
+  params: { lang: string }
+}) {
+  const dict = await getDictionary(lang)
 
   return (
     <>
+      {/* パンくずリストとページヘッダー */}
       <div className="bg-sky-900 text-white">
         <div className="container mx-auto px-4">
+          {/* パンくずリスト */}
           <div className="py-4 text-sm text-sky-100">
             <div className="flex items-center gap-2">
-              <Link href="/" className="hover:text-white transition-colors">
-                {t.navigation.home}
+              <Link href={`/${lang}`} className="hover:text-white transition-colors">
+                {dict.common.breadcrumbHome}
               </Link>
               <ChevronRight className="h-4 w-4" />
-              <span>{t.contact.title}</span>
+              <span>{dict.contact.title}</span>
             </div>
           </div>
+          {/* ページヘッダー */}
           <div className="py-8 md:py-16">
-            <h1 className="text-3xl md:text-5xl font-bold">{t.contact.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">{dict.contact.title}</h1>
           </div>
         </div>
       </div>
 
+      {/* メインコンテンツ */}
       <div className="container mx-auto px-4 py-8 md:py-16">
         <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <h2 className="text-center text-xl font-medium text-foreground">{t.contact.description}</h2>
-          </CardHeader>
           <CardContent>
             <div className="relative w-full overflow-hidden" style={{ paddingTop: "832px" }}>
               <iframe
@@ -41,12 +42,12 @@ export default function ContactPage() {
                 width="640"
                 height="832"
                 className="absolute top-0 left-0 w-full h-full border-0"
-                title={t.contact.title}
+                title={dict.contact.title}
                 frameBorder="0"
                 marginHeight="0"
                 marginWidth="0"
               >
-                {t.contact.loading}
+                {dict.contact.loading}
               </iframe>
             </div>
           </CardContent>

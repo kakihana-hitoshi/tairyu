@@ -3,24 +3,25 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Globe, Menu } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { translations } from "@/translations"
+import type { Dictionary } from "@/types/dictionary"
 
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
-export function SiteHeader() {
-  const { language, setLanguage } = useLanguage()
-  const t = translations[language as keyof typeof translations]
+interface SiteHeaderClientProps {
+  dict: Dictionary
+  lang: string
+}
 
-  const navigationItems = [
-    { href: "/", label: t.navigation.home },
-    { href: "/notice", label: t.navigation.notice },
-    { href: "/sailing-instructions", label: t.navigation.sailingInstructions },
-    { href: "/participants", label: t.navigation.participants },
-    { href: "/past-events", label: t.navigation.pastEvents },
-    { href: "/contact", label: t.navigation.contact },
+export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
+  const localizedNavItems = [
+    { href: `/${lang}`, label: dict.navigation.home },
+    { href: `/${lang}/notice`, label: dict.navigation.notice },
+    { href: `/${lang}/sailing-instructions`, label: dict.navigation.sailingInstructions },
+    { href: `/${lang}/participants`, label: dict.navigation.participants },
+    { href: `/${lang}/past-events`, label: dict.navigation.pastEvents },
+    { href: `/${lang}/contact`, label: dict.navigation.contact },
   ]
 
   return (
@@ -32,15 +33,15 @@ export function SiteHeader() {
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
                   <Menu className="h-6 w-6" />
-                  <span className="sr-only">{t.header.menuTitle}</span>
+                  <span className="sr-only">{dict.header.menuTitle}</span>
                 </Button>
               </SheetTrigger>
               <SheetContent side="left">
                 <SheetHeader>
-                  <SheetTitle>{t.header.menuTitle}</SheetTitle>
+                  <SheetTitle>{dict.header.menuTitle}</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col space-y-4 mt-6">
-                  {navigationItems.map((item) => (
+                  {localizedNavItems.map((item) => (
                     <Link key={item.label} href={item.href} className="text-lg hover:text-sky-600 transition-colors">
                       {item.label}
                     </Link>
@@ -49,10 +50,10 @@ export function SiteHeader() {
               </SheetContent>
             </Sheet>
             <div className="flex items-center">
-              <Link href="/">
+              <Link href={`/${lang}`}>
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo.jpg-irkXlOqUxOVAWV8zQIk2gp4zLndFmC.jpeg"
-                  alt={language === "ja" ? "台湾友好親善国際ヨットレース" : "台琉友好親善國際帆船賽"}
+                  alt="台湾友好親善国際ヨットレース"
                   width={180}
                   height={120}
                   className="h-14 w-auto"
@@ -60,11 +61,11 @@ export function SiteHeader() {
               </Link>
             </div>
             <h1 className="text-lg font-bold hidden md:block">
-              {language === "ja" ? "台湾友好親善国際ヨットレース" : "台琉友好親善國際帆船賽"}
+              {lang === "ja" ? "台湾友好親善国際ヨットレース" : "台琉友好親善國際帆船賽"}
             </h1>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            {navigationItems.map((item) => (
+            {localizedNavItems.map((item) => (
               <Link key={item.label} href={item.href} className="text-sm hover:text-sky-600 transition-colors">
                 {item.label}
               </Link>
@@ -75,35 +76,45 @@ export function SiteHeader() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Globe className="h-5 w-5" />
-                  <span className="sr-only">{t.header.languageSwitch}</span>
+                  <span className="sr-only">{dict.header.languageSwitch}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage("ja")} className="flex items-center gap-2">
-                  <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/japan-ZjjRh2S1CZZpI6oujbZLS8QbPxaerf.png"
-                    alt="日本"
-                    width={20}
-                    height={15}
-                    className="h-3.5 w-auto object-contain"
-                  />
-                  日本語
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={`/ja${lang === "ja" ? "" : window.location.pathname.substring(6)}`}
+                    className="flex items-center gap-2"
+                  >
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/japan-ZjjRh2S1CZZpI6oujbZLS8QbPxaerf.png"
+                      alt="日本"
+                      width={20}
+                      height={15}
+                      className="h-3.5 w-auto object-contain"
+                    />
+                    日本語
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage("zh-TW")} className="flex items-center gap-2">
-                  <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/taiwan-MzMeJIyeE7y9UGZS4BsZ26hNK4paF3.png"
-                    alt="台湾"
-                    width={20}
-                    height={15}
-                    className="h-3.5 w-auto object-contain"
-                  />
-                  台灣華語
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={`/zh-TW${lang === "zh-TW" ? "" : window.location.pathname.substring(3)}`}
+                    className="flex items-center gap-2"
+                  >
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/taiwan-MzMeJIyeE7y9UGZS4BsZ26hNK4paF3.png"
+                      alt="台湾"
+                      width={20}
+                      height={15}
+                      className="h-3.5 w-auto object-contain"
+                    />
+                    台灣華語
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link href="/sailing-instructions">
+            <Link href={`/${lang}/sailing-instructions`}>
               <Button asChild className="hidden md:block">
-                <span>{t.header.entryOpen}</span>
+                <span>{dict.header.entryOpen}</span>
               </Button>
             </Link>
           </div>

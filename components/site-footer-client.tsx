@@ -2,20 +2,21 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useLanguage } from "@/contexts/language-context"
-import { translations } from "@/translations"
+import type { Dictionary } from "@/types/dictionary"
 
-export function SiteFooter() {
-  const { language } = useLanguage()
-  const t = translations[language as keyof typeof translations]
+interface SiteFooterClientProps {
+  dict: Dictionary
+  lang: string
+}
 
-  const navigationItems = [
-    { href: "/", label: t.navigation.home },
-    { href: "/notice", label: t.navigation.notice },
-    { href: "/sailing-instructions", label: t.navigation.sailingInstructions },
-    { href: "/participants", label: t.navigation.participants },
-    { href: "/past-events", label: t.navigation.pastEvents },
-    { href: "/contact", label: t.navigation.contact },
+export function SiteFooterClient({ dict, lang }: SiteFooterClientProps) {
+  const localizedNavItems = [
+    { href: `/${lang}`, label: dict.navigation.home },
+    { href: `/${lang}/notice`, label: dict.navigation.notice },
+    { href: `/${lang}/sailing-instructions`, label: dict.navigation.sailingInstructions },
+    { href: `/${lang}/participants`, label: dict.navigation.participants },
+    { href: `/${lang}/past-events`, label: dict.navigation.pastEvents },
+    { href: `/${lang}/contact`, label: dict.navigation.contact },
   ]
 
   return (
@@ -30,7 +31,11 @@ export function SiteFooter() {
               height={120}
               className="w-auto h-14 mb-4"
             />
-            <p className="text-sm text-gray-400 mb-4">{t.footer.description}</p>
+            <p className="text-sm text-gray-400 mb-4">
+              {lang === "ja"
+                ? "台湾琉球国際ヨットレースは、基隆市と宮古島市の姉妹都市交流事業として開催されます。"
+                : "台琉國際帆船賽是基隆市與宮古島市姊妹城市交流活動的一部分。"}
+            </p>
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tairyu-tJ1GIuLxlxSXyqsdmlchZXbhQi5D0X.png"
               alt="台琉"
@@ -40,9 +45,9 @@ export function SiteFooter() {
             />
           </div>
           <div>
-            <h5 className="font-bold mb-4">{t.footer.links}</h5>
+            <h5 className="font-bold mb-4">{dict.footer.links}</h5>
             <ul className="space-y-2 text-sm text-gray-400">
-              {navigationItems.map((item) => (
+              {localizedNavItems.map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="hover:text-white transition-colors">
                     {item.label}
@@ -52,12 +57,12 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <h5 className="font-bold mb-4">{t.footer.contact}</h5>
-            <p className="text-sm text-gray-400">{t.footer.contactText}</p>
+            <h5 className="font-bold mb-4">{dict.footer.contactUs}</h5>
+            <p className="text-sm text-gray-400">{dict.footer.contactText}</p>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
-          <p>{t.footer.copyright}</p>
+          <p>{dict.footer.copyright}</p>
         </div>
       </div>
     </footer>

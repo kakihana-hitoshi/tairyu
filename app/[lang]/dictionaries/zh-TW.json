@@ -1,0 +1,73 @@
+{
+  "navigation": {
+    "home": "首頁",
+    "notice": "公告",
+    "sailingInstructions": "帆船指導書",
+    "participants": "參賽船隻",
+    "pastEvents": "歷屆賽事回顧",
+    "contact": "聯絡我們"
+  },
+  "header": {
+    "menuTitle": "選單",
+    "languageSwitch": "切換語言",
+    "entryOpen": "報名開放中"
+  },
+  "footer": {
+    "links": "連結",
+    "contactUs": "聯絡我們",
+    "contactText": "如有關於賽事的任何問題，請透過聯絡表單與我們聯繫。",
+    "copyright": "Copyright © 2025 台琉國際帆船賽. All Rights Reserved."
+  },
+  "home": {
+    "mainTitle": "第21屆台琉友好親善國際帆船賽",
+    "subtitle": "（基隆市・宮古島市 國際交流活動）",
+    "slogan": "從沖繩宮古島，邁向世界的宮古島！！",
+    "eventDate": "2025年6月7日〜12日 台灣基隆市・宮古島市舉辦",
+    "applyButton": "立即報名",
+    "detailsButton": "賽事詳情",
+    "latestNews": "最新消息",
+    "newsCategory": {
+      "announcement": "公告",
+      "event": "活動"
+    },
+    "overview": "活動概要",
+    "schedule": "舉辦日程",
+    "venue": "舉辦地點",
+    "contact": "聯絡方式"
+  },
+  "notice": {
+    "title": "公告",
+    "downloadButton": "下載公告PDF"
+  },
+  "sailingInstructions": {
+    "title": "帆船指導書",
+    "fullText": "2025帆船指導書",
+    "fullTextDesc": "帆船指導書完整PDF文件。",
+    "selfDeclaration": "Self Declaration Form",
+    "selfDeclarationDesc": "自我申報表PDF表格。",
+    "download": "下載",
+    "contactText": "如有關於帆船指導書的問題，請聯絡大會事務局。",
+    "contactLink": "聯絡我們"
+  },
+  "participants": {
+    "title": "參賽船隻",
+    "japanese": "日本參賽船隻",
+    "international": "國際參賽船隻",
+    "preparingInfo": "參賽船隻資訊準備中",
+    "noticeTitle": "致參賽船隻"
+  },
+  "pastEvents": {
+    "title": "歷屆賽事回顧",
+    "videoTitle": "2023年賽事影片",
+    "videoDesc": "2023年台琉國際帆船賽精彩回顧",
+    "browserNotSupported": "您的瀏覽器不支援影片播放。"
+  },
+  "contact": {
+    "title": "聯絡我們",
+    "loading": "載入中..."
+  },
+  "common": {
+    "breadcrumbHome": "首頁"
+  }
+}
+

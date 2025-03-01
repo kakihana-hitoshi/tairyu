@@ -1,28 +1,42 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { Globe, Menu } from "lucide-react"
-import type { Dictionary } from "@/types/dictionary"
+import Image from "next/image";
+import Link from "next/link";
+import { Globe, Menu } from "lucide-react";
+import type { Dictionary } from "@/types/dictionary";
 
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface SiteHeaderClientProps {
-  dict: Dictionary
-  lang: string
+  dict: Dictionary;
+  lang: string;
 }
 
 export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
   const localizedNavItems = [
     { href: `/${lang}`, label: dict.navigation.home },
     { href: `/${lang}/notice`, label: dict.navigation.notice },
-    { href: `/${lang}/sailing-instructions`, label: dict.navigation.sailingInstructions },
+    {
+      href: `/${lang}/sailing-instructions`,
+      label: dict.navigation.sailingInstructions,
+    },
     { href: `/${lang}/participants`, label: dict.navigation.participants },
     { href: `/${lang}/past-events`, label: dict.navigation.pastEvents },
     { href: `/${lang}/contact`, label: dict.navigation.contact },
-  ]
+  ];
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-slate-900/70 border-b">
@@ -42,7 +56,11 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
                 </SheetHeader>
                 <nav className="flex flex-col space-y-4 mt-6">
                   {localizedNavItems.map((item) => (
-                    <Link key={item.label} href={item.href} className="text-lg hover:text-sky-600 transition-colors">
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="text-lg hover:text-sky-600 transition-colors"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -53,7 +71,7 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
               <Link href={`/${lang}`}>
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo.jpg-irkXlOqUxOVAWV8zQIk2gp4zLndFmC.jpeg"
-                  alt="台湾友好親善国際ヨットレース"
+                  alt="b台湾友好親善国際ヨットレース"
                   width={180}
                   height={120}
                   className="h-14 w-auto"
@@ -61,12 +79,18 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
               </Link>
             </div>
             <h1 className="text-lg font-bold hidden md:block">
-              {lang === "ja" ? "台湾友好親善国際ヨットレース" : "台琉友好親善國際帆船賽"}
+              {lang === "ja"
+                ? "baaaa台湾友好親善国際ヨットレース"
+                : "台琉友好親善國際帆船賽"}
             </h1>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             {localizedNavItems.map((item) => (
-              <Link key={item.label} href={item.href} className="text-sm hover:text-sky-600 transition-colors">
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-sm hover:text-sky-600 transition-colors"
+              >
                 {item.label}
               </Link>
             ))}
@@ -82,7 +106,9 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
                   <Link
-                    href={`/ja${lang === "ja" ? "" : window.location.pathname.substring(6)}`}
+                    href={`/ja${
+                      lang === "ja" ? "" : window.location.pathname.substring(6)
+                    }`}
                     className="flex items-center gap-2"
                   >
                     <Image
@@ -97,7 +123,11 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link
-                    href={`/zh-TW${lang === "zh-TW" ? "" : window.location.pathname.substring(3)}`}
+                    href={`/zh-TW${
+                      lang === "zh-TW"
+                        ? ""
+                        : window.location.pathname.substring(3)
+                    }`}
                     className="flex items-center gap-2"
                   >
                     <Image
@@ -121,6 +151,5 @@ export function SiteHeaderClient({ dict, lang }: SiteHeaderClientProps) {
         </div>
       </div>
     </header>
-  )
+  );
 }
-

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { navigationItems } from "@/components/navigation"
+import { navigationItems } from "@/config/navigation"
 
 export function SiteFooter() {
   return (
@@ -16,16 +16,9 @@ export function SiteFooter() {
               height={120}
               className="w-auto h-14 mb-4"
             />
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-gray-400">
               台湾琉球国際ヨットレースは、基隆市と宮古島市の姉妹都市交流事業として開催されます。
             </p>
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tairyu-tJ1GIuLxlxSXyqsdmlchZXbhQi5D0X.png"
-              alt="台琉"
-              width={100}
-              height={50}
-              className="w-auto h-10"
-            />
           </div>
           <div>
             <h5 className="font-bold mb-4">リンク</h5>

@@ -1,9 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Menu } from "lucide-react"
+import { Globe, Menu } from "lucide-react"
 
 import { navigationItems } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
 export function SiteHeader() {
@@ -50,7 +51,37 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Globe className="h-5 w-5" />
+                  <span className="sr-only">言語切替</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem className="flex items-center gap-2">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/japan-ZjjRh2S1CZZpI6oujbZLS8QbPxaerf.png"
+                    alt="日本"
+                    width={20}
+                    height={15}
+                    className="h-3.5 w-auto object-contain"
+                  />
+                  日本語
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center gap-2">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/taiwan-MzMeJIyeE7y9UGZS4BsZ26hNK4paF3.png"
+                    alt="台湾"
+                    width={20}
+                    height={15}
+                    className="h-3.5 w-auto object-contain"
+                  />
+                  台湾華語
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link href="/sailing-instructions">
               <Button asChild className="hidden md:block">
                 <span>エントリー受付中</span>
